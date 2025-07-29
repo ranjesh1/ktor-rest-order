@@ -18,6 +18,7 @@ object DatabaseFactory {
         // Create tables if not exist
         transaction {
             SchemaUtils.create(Users)
+            SchemaUtils.create(Orders)
         }
 
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE

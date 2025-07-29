@@ -2,7 +2,6 @@ package com.demo.app.routes
 
 import com.demo.app.models.PartialUserUpdate
 import com.demo.app.models.User
-import com.demo.app.db.UserDAO
 import com.demo.app.services.UserService
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -16,12 +15,10 @@ fun Route.userRoutes() {
 
     route("/api/users") {
 
-        // GET /users
         get {
             call.respond(userService.getAllUsers())
         }
 
-        // GET /users/{id}
         get("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id == null) {
@@ -36,14 +33,12 @@ fun Route.userRoutes() {
             }
         }
 
-        // POST /users
         post {
             val user = call.receive<User>()
             val savedUser = userService.createUser(user)
             call.respond(HttpStatusCode.Created, savedUser)
         }
 
-        // PUT /users/{id}
         put("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id == null) {
@@ -59,7 +54,6 @@ fun Route.userRoutes() {
             }
         }
 
-        // PATCH /users/{id}
         patch("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id == null) {
@@ -77,7 +71,6 @@ fun Route.userRoutes() {
             }
         }
 
-        // DELETE /users/{id}
         delete("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id == null) {

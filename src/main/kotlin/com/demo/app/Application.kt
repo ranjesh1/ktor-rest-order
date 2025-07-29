@@ -3,6 +3,7 @@ package com.demo.app
 import com.demo.app.routes.userRoutes
 import com.demo.app.db.DatabaseFactory
 import com.demo.app.di.appModule
+import com.demo.app.routes.orderRoutes
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.application.*
@@ -32,6 +33,7 @@ fun Application.module() {
 
     routing {
         userRoutes()
+        orderRoutes()
         /*route("/api/users") {
             get {
                 call.respond(users.toList())

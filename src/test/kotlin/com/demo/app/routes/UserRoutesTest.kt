@@ -17,8 +17,6 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
@@ -33,18 +31,6 @@ class UserRoutesTest {
     }
     val mockUserService = mockk<UserService>(relaxed = true)
 
-
-    @BeforeEach
-    fun setUp() {
-//        clearAllMocks()
-//        application { testModule(mockUserService) }
-    }
-
-    @AfterEach
-    fun tearDown() {
-//        clearAllMocks()
-//        stopKoin()
-    }
 
     private fun Application.testModule(mockUserService: UserService) {
         if (pluginOrNull(io.ktor.server.plugins.contentnegotiation.ContentNegotiation) == null) {
@@ -79,7 +65,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `GET all users should return list`() = testApplication {
+    fun `Get all users should return list`() = testApplication {
         application { testModule(mockUserService) }
         val testUsers = listOf(
             User(
@@ -101,7 +87,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `GET user by ID should return user`() = testApplication {
+    fun `Get user by ID should return user`() = testApplication {
         application { testModule(mockUserService) }
 
         val testUser = User(
@@ -124,7 +110,7 @@ class UserRoutesTest {
 
 
     @Test
-    fun `GET user by ID should return 404 if not found`() = testApplication {
+    fun `Get user by ID should return 404 if not found`() = testApplication {
         application { testModule(mockUserService) }
 
         every { mockUserService.getUser(999) } returns null
@@ -134,7 +120,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `POST create user should return created user`() = testApplication {
+    fun `Post user should return created user`() = testApplication {
         application { testModule(mockUserService) }
 
         val newUser = User(
@@ -163,7 +149,7 @@ class UserRoutesTest {
 
 
     @Test
-    fun `PUT update user should return updated user`() = testApplication {
+    fun `Put user should return updated user`() = testApplication {
         application { testModule(mockUserService) }
 
         val updatedUser = User(
@@ -190,7 +176,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `PUT update user should return 404 if not found`() = testApplication {
+    fun `Put user should return 404 if not found`() = testApplication {
         application { testModule(mockUserService) }
 
         every { mockUserService.updateUser(1, any()) } returns null
@@ -214,7 +200,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `PATCH patch user should return updated user`() = testApplication {
+    fun `Patch user should return patched user`() = testApplication {
         application { testModule(mockUserService) }
 
         val partial = PartialUserUpdate(firstName = "Patched", email = null)
@@ -240,7 +226,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `PATCH patch user should return 404 if not found`() = testApplication {
+    fun `Patch user should return 404 if not found`() = testApplication {
         application { testModule(mockUserService) }
 
 
@@ -255,7 +241,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `DELETE user should return success`() = testApplication {
+    fun `Delete user should return success`() = testApplication {
         application { testModule(mockUserService) }
 
         every { mockUserService.deleteUser(1) } returns true
@@ -266,7 +252,7 @@ class UserRoutesTest {
     }
 
     @Test
-    fun `DELETE user should return 404 if not found`() = testApplication {
+    fun `Delete user should return 404 if not found`() = testApplication {
         application { testModule(mockUserService) }
 
         every { mockUserService.deleteUser(1) } returns false

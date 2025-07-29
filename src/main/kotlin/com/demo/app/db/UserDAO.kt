@@ -46,7 +46,7 @@ class UserDAO {
     }
 
     fun patch(id: Long, updates: PartialUserUpdate): User? = transaction {
-        val user = Users.select { Users.id eq id }.singleOrNull() ?: return@transaction null
+//        val user = Users.select { Users.id eq id }.singleOrNull() ?: return@transaction null
 
         Users.update({ Users.id eq id }) {
             updates.firstName?.let { f -> it[firstName] = f }
