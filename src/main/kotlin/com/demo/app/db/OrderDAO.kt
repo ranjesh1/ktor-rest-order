@@ -13,7 +13,7 @@ class OrderDAO {
             it[description] = order.description
             it[priceInPence] = order.priceInPence
             it[completedStatus] = order.completedStatus
-            it[user] = EntityID(userId, Users) // ✅ new way
+            it[user] = EntityID(userId, Users)
         } get Orders.id
 
         order.copy(id = id.value, userId = userId)
@@ -52,32 +52,10 @@ class OrderDAO {
             partialOrderUpdate.description?.let { desc -> it[description] = desc }
             partialOrderUpdate.priceInPence?.let { price -> it[priceInPence] = price }
             partialOrderUpdate.completedStatus?.let { status -> it[completedStatus] = status }
-//            partialOrderUpdate.userId?.let { id -> it[userId] = id }
-//            order.description?.let { desc -> it[description] = desc }
-//            order.description?.let { desc -> it[description] = desc }
-//            if (order.priceInPence != 0L) it[priceInPence] = order.priceInPence
-//            it[completedStatus] = order.completedStatus
         }
 
         if (updated > 0) getbyIdAndUserId(userId, orderId) else null
     }
-
-
-    /*fun patch(id: Long, updates: PartialUserUpdate): User? = transaction {
-        val user = Users.select { Users.id eq id }.singleOrNull() ?: return@transaction null
-
-        Users.update({ Users.id eq id }) {
-            updates.firstName?.let { f -> it[firstName] = f }
-            updates.lastName?.let { l -> it[lastName] = l }
-            updates.email?.let { e -> it[email] = e }
-            updates.firstLineOfAddress?.let { f -> it[firstLineOfAddress] = f }
-            updates.secondLineOfAddress?.let { s -> it[secondLineOfAddress] = s }
-            updates.town?.let { t -> it[town] = t }
-            updates.postCode?.let { p -> it[postCode] = p }
-        }
-
-        getById(id)
-    }*/
 
     fun deleteByIdAndUserId(orderId: Long, userId: Long): Boolean = transaction {
         Orders.deleteWhere {
@@ -90,6 +68,6 @@ class OrderDAO {
         description = row[Orders.description],
         priceInPence = row[Orders.priceInPence],
         completedStatus = row[Orders.completedStatus],
-        userId = row[Orders.user].value // ✅ unwrap EntityID
+        userId = row[Orders.user].value
     )
 }
