@@ -1,24 +1,23 @@
 # Project Name
 
-Brief description of what your project does.
+ktor-rest-order
 
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting-started)
-- [Building](#building)
 - [Running](#running)
 - [Testing](#testing)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## About
 
-Describe what this project is for, its main features, and any important context.
+This project shows basic usage of ktor framework to build REST end points for user and order entity
 
 ## Running
 ``` ./gradlew run ```
+
+## Testing
+``` ./gradlew test ```
 
 ## Getting Started
 
@@ -26,7 +25,7 @@ These instructions will help you set up the project on your local machine.
 
 ### Prerequisites
 
-- Java 17+ (or your project’s version)
+- Java 21+ (or your project’s version)
 - [Gradle](https://gradle.org/) (optional, you can use the Gradle Wrapper)
 
 ### Clone the repository
