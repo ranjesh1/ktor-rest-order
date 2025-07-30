@@ -63,6 +63,17 @@ class OrderDAOTest {
         userId,
     )
 
+    private fun insertTestUser(): Long = transaction {
+        Users.insertAndGetId {
+            it[firstName] = "testuser"
+            it[lastName] = "testuserLastName"
+            it[email] = "test@example.com"
+            it[firstLineOfAddress] = "1st Street"
+            it[secondLineOfAddress] = "1st Block"
+            it[town] = "Town"
+            it[postCode] = "AB 123"
+        }.value
+    }
 
     object Users : LongIdTable("users") {
         val firstName = varchar("first_name", length = 50)
@@ -78,17 +89,8 @@ class OrderDAOTest {
     @Test
     fun `add and get order`() {
 
-        val userId = transaction {
-            Users.insertAndGetId {
-                it[firstName] = "testuser"
-                it[lastName] = "testuserLastName"
-                it[email] = "test@example.com"
-                it[firstLineOfAddress] = "1st Street"
-                it[secondLineOfAddress] = "1st Block"
-                it[town] = "Town"
-                it[postCode] = "AB 123"
-            }.value
-        }
+        val userId = insertTestUser()
+
 
         val saved = dao.add(userId, createTestOrder(userId = userId))
         assertNotNull(saved.id)
@@ -99,17 +101,7 @@ class OrderDAOTest {
 
     @Test
     fun `update order`() {
-        val userId = transaction {
-            Users.insertAndGetId {
-                it[firstName] = "testuser"
-                it[lastName] = "testuserLastName"
-                it[email] = "test@example.com"
-                it[firstLineOfAddress] = "1st Street"
-                it[secondLineOfAddress] = "1st Block"
-                it[town] = "Town"
-                it[postCode] = "AB 123"
-            }.value
-        }
+        val userId = insertTestUser()
 
         val saved = dao.add(userId, createTestOrder(userId = userId))
 
@@ -130,17 +122,7 @@ class OrderDAOTest {
     @Test
     fun `patch order`() {
 
-        val userId = transaction {
-            Users.insertAndGetId {
-                it[firstName] = "testuser"
-                it[lastName] = "testuserLastName"
-                it[email] = "test@example.com"
-                it[firstLineOfAddress] = "1st Street"
-                it[secondLineOfAddress] = "1st Block"
-                it[town] = "Town"
-                it[postCode] = "AB 123"
-            }.value
-        }
+        val userId = insertTestUser()
 
         val saved = dao.add(userId, createTestOrder(userId = userId))
 
