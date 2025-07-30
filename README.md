@@ -31,5 +31,5 @@ These instructions will help you set up the project on your local machine.
 ### Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/ranjesh1/ktor-rest-order.git
+cd ktor-rest-order
