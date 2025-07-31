@@ -15,7 +15,6 @@ object DatabaseFactory {
             password = ""
         )
 
-        // Create tables if not exist
         transaction {
             SchemaUtils.create(Users)
             SchemaUtils.create(Orders)

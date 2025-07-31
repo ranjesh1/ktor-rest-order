@@ -10,5 +10,4 @@ object Users : LongIdTable("users") {
     val secondLineOfAddress = varchar("second_line_of_address", length = 50).nullable()
     val town = varchar("town", length = 50)
     val postCode = varchar("post_code", length = 10)
-
 }

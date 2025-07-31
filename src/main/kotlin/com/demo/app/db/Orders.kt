@@ -8,6 +8,4 @@ object Orders : LongIdTable("orders") {
     val priceInPence = long("price_in_pence")
     val completedStatus = bool("completed_status").default(false)
     val user = reference("user_id", Users, onDelete = ReferenceOption.CASCADE)
-//    val userIdFk = long("user_id").references(Users.id, onDelete = ReferenceOption.CASCADE)
-
 }
